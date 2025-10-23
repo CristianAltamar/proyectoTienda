@@ -24,7 +24,8 @@ export const Home = () => {
     return (
         <>
             <Hero />
-            {isCharging ? <p>Cargando productos...</p> : <Products products={products} />}
+            {isCharging ? <p>Cargando productos...</p> : 
+            <Products products={products} />}
         </>
     )
 }

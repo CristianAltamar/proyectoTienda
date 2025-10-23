@@ -1,13 +1,16 @@
-import { endpoints } from "./api/enpoints"
-import { useFetch } from "./hooks/useFetch"
 import { Layout } from "./components/Layout"
 import { Home } from "./pages/Home"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 function App() {
   return (
     <Layout>
-      <Home />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </Layout>
   )
 }
