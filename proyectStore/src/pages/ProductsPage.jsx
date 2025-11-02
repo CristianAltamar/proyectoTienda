@@ -8,23 +8,26 @@ import { ProductsContext } from "../contexts/contextProducts";
 import { Sidebar } from "../components/Products/Sidebar";
 import { Filters } from "../components/Products/Filters";
 
+
 export const ProductsPage = () => {
     const [isCharging, setIsCharging] = useState(false);
     const { filterProducts } = useFilters();
-    const { products, setProducts } = useContext(ProductsContext);
+    const { products, setProducts, filters } = useContext(ProductsContext);
 
     useEffect(() => {
+        console.log(filters)
         const fetchProducts = async () => {
             setIsCharging(true);
             const data = await useFetch(endpoints.getProducts());
             if (data) {
-                const p = filterProducts({ products: data });
+                const p = filterProducts({ products: data, ...filters });
                 setProducts(p);
             }
             setIsCharging(false);
         };
         fetchProducts();
-    }, []);
+
+    }, [filters]);
 
     return (
         <div className="flex w-full max-w-6xl m-8 gap-8 relative">
