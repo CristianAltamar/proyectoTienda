@@ -2,17 +2,40 @@ import { Lens } from "./Lens"
 import { FilterIcon } from "./FilterIcon"
 import { useState } from "react"
 import { setUrlFilters } from "../../utils/getFilters"
+import { useContext } from "react"
+import { ProductsContext } from "../../contexts/contextProducts"
 
 export const Filters = () => {
     const [showFilters, setShowFilters] = useState(false)
+    const { filters, setFilters, clearFilters } = useContext(ProductsContext)
 
     const onInputChange = (e) => {
         clearTimeout(window.searchTimeout)
         window.searchTimeout = setTimeout(() => {
             const value = e.target.value
-            setUrlFilters({ search: value })
+            setFilters(prev => ({ 
+                ...prev,
+                ["name"]: value
+            }))
         }, 300)
     }
+
+    const onChange = (value, key) => {
+        if (filters[key] == value) {
+            setFilters(prev => ({
+                ...prev,
+                [key]:""
+            }))
+            return
+        }
+        setFilters(prev => ({
+            ...prev,
+            [key]: value
+        }))
+    }
+
+    const baseStyles = "bg-gray-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-600 cursor-pointer "
+    const actveStyles = "text-white px-4 py-2 rounded-2xl bg-blue-600 cursor-pointer"
 
     const Controls = (
         <div className="flex flex-col lg:flex-row lg:sticky lg:w-full top-0 left-0 gap-2 mb-8">
@@ -20,16 +43,16 @@ export const Filters = () => {
                 <input type="text" placeholder="Buscar productos..." className="border p-2 rounded-2xl w-full" onChange={onInputChange} />
                 <Lens />
             </div>
-            <button className="bg-gray-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-600 cursor-pointer" onClick={() => setUrlFilters({ orderBy: "price-asc" })}>
+            <button className={ filters["orderBy"] == "price-asc" ? actveStyles : baseStyles } onClick={() => onChange("price-asc", "orderBy" )}>
                 Precio ascendente
             </button>
-            <button className="bg-gray-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-600 cursor-pointer" onClick={() => setUrlFilters({ orderBy: "price-desc" })}>
+            <button className={ filters["orderBy"] == "price-desc" ? actveStyles : baseStyles } onClick={() =>  onChange("price-desc", "orderBy" )}>
                 Precio descendente
             </button>
-            <button className="bg-gray-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-600 cursor-pointer" onClick={() => setUrlFilters({ orderBy: "A-Z" })}>
+            <button className={ filters["orderBy"] == "A-Z" ? actveStyles : baseStyles } onClick={() =>  onChange("A-Z", "orderBy" )}>
                 A-Z
             </button>
-            <button className="bg-gray-500 text-white px-4 py-2 rounded-2xl hover:bg-blue-600 cursor-pointer" onClick={() => setUrlFilters({ orderBy: "Z-A" })}>
+            <button className={ filters["orderBy"] == "Z-A" ? actveStyles : baseStyles } onClick={() =>  onChange("Z-A", "orderBy" )}>
                 Z-A
             </button>
         </div>

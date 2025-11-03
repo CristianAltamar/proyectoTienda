@@ -27,23 +27,7 @@ export const getUrlFilters = () => {
     const urlParams = new URLSearchParams(window.location.search);
 
     for (const [key, value] of urlParams.entries()) {
-        if (schema[key]) {
-            switch (schema[key].type) {
-                case "string":
-                    if (value.length >= schema[key].minLength && value.length <= schema[key].maxLength) {
-                        filters[key] = value;
-                    }
-                    break;
-                case "array":
-                    try {
-                        const arrayValue = JSON.parse(value);
-                        if (Array.isArray(arrayValue) && arrayValue?.length >= schema[key].minItems && arrayValue?.length <= schema[key].maxItems) {
-                            filters[key] = arrayValue;
-                        }
-                    } catch (e) {}
-                    break;
-            }
-        }
+        if (schema[key]) filters[key] = value
     }
 
     return filters;

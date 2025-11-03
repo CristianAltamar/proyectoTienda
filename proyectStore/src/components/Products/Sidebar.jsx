@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useContext } from "react"
 import { setUrlFilters } from "../../utils/getFilters"
+import { ProductsContext } from "../../contexts/contextProducts"
 
 const categories = [
     "men's clothing",
@@ -11,6 +12,7 @@ const categories = [
 export const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const panelRef = useRef(null)
+    const { filters, setFilters, clearFilters } = useContext(ProductsContext)
 
     // close on ESC
     useEffect(() => {
@@ -33,10 +35,21 @@ export const Sidebar = () => {
     }, [isOpen])
 
     const onClickCategory = (category) => {
-        const filters = { category }
-        setUrlFilters(filters)
-        window.location.reload()
+        if (filters["category"] === category) {
+            setFilters(prev => ({
+                ...prev,
+                ["category"]: "all"
+            }))
+            return
+        }
+        setFilters(prev => ({
+            ...prev,
+            ["category"]: category
+        }))
     }
+
+    const baseStyles = "hover:text-[#4CE9D7] cursor-pointer"
+    const activeStyles = "text-[#4CE9D7] cursor-pointer"
 
     return (
         <>
@@ -61,7 +74,7 @@ export const Sidebar = () => {
                 <ul className="mt-4 space-y-2">
                     {categories.map((category) => (
                         <li key={category} 
-                        className="hover:text-[#4CE9D7] cursor-pointer"
+                        className={ filters["category"] == category ? activeStyles : baseStyles }
                         onClick={() => onClickCategory(category)}
                         >
                             {category}
@@ -104,7 +117,7 @@ export const Sidebar = () => {
                             {categories.map((category) => (
                                 <li
                                     key={category}
-                                    className="hover:text-[#4CE9D7] cursor-pointer"
+                                    className={ filters["category"] == category ? activeStyles : baseStyles }
                                     onClick={() =>{ setIsOpen(false); onClickCategory(category)}}
                                 >
                                     {category}

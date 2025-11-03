@@ -1,8 +1,8 @@
 export const orderByProducts = (data, criteria) => {
     switch (criteria) {
-        case "asc-price":
+        case "price-asc":
             return data.sort((a, b) => a.price - b.price);
-        case "desc-price":
+        case "price-desc":
             return data.sort((a, b) => b.price - a.price);
         case "A-Z":
             return data.sort((a, b) => a.title.localeCompare(b.title));
