@@ -1,5 +1,5 @@
-import { endpoints } from "../api/enpoints"
-import { useFetch } from "../hooks/useFetch"
+import { endpoints } from "../api/enpoints.js"
+import { useFetch } from "../hooks/useFetch.jsx"
 import { useEffect, useState, useContext } from "react"
 import { DetailProduct } from "../components/productById/DetailProduct.jsx"
 import { Products } from "../components/store/Products.jsx"
