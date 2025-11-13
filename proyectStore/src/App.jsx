@@ -5,6 +5,7 @@ import { ProductPage } from "./pages/ProductPageDetail.jsx";
 import { AboutUsPage } from "./pages/aboutUsPage.jsx";
 import { ContatPage } from "./pages/contactPage.jsx";
 import { LogingPage } from "./pages/logingPage.jsx";
+import { CreatePage } from "./pages/CreatePage.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ProductsProvider } from "./contexts/contextProducts";
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/about" element={<AboutUsPage />} />
             <Route path="/contact" element={<ContatPage />} />
             <Route path="/login" element={<LogingPage />} />
+            <Route path="/create-account" element={<CreatePage />} />
           </Routes>
         </ProductsProvider>
       </BrowserRouter>

@@ -1,4 +1,4 @@
-export const useFetch = async (endpoint, method = 'GET' , body = null) => {
+export const useFetch = async (endpoint, method = 'GET' , body = null, login = false) => {
     if (!endpoint) return null;
 
     if (method === 'GET' || method === 'DELETE') {
@@ -22,12 +22,18 @@ export const useFetch = async (endpoint, method = 'GET' , body = null) => {
         };
 
         if (body) {
+            console.log("body", body);
             options.body = JSON.stringify(body);
         }
 
         try {
             const response = await fetch(endpoint, options);
             if (!response.ok) throw new Error('Network response was not ok');
+            if (login) {
+                const data = await response.json();
+                localStorage.setItem('token', data.token);
+                return data;
+            }
             return await response.json();
         } catch (error) {
             console.error('Fetch error:', error);
