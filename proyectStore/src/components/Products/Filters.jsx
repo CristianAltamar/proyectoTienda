@@ -61,7 +61,7 @@ export const Filters = () => {
     return (
         <>
             <button
-                className="lg:hidden px-4 absolute right-6 bottom-full mb-3 mr-2 z-50 hover:scale-105 transition-transform duration-200 cursor-pointer"
+                className="lg:hidden absolute right-20 bottom-full -top-5 z-20 hover:scale-105 transition-transform duration-200 cursor-pointer"
                 onClick={() => setShowFilters((s) => !s)}
                 aria-expanded={showFilters}
                 aria-controls="mobile-filters"

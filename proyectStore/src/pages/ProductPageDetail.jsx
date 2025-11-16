@@ -49,7 +49,7 @@ export const ProductPage = () => {
                 </div>
                 :
                 <p>Cargando...</p>
-                }
+            }
         </>
     )
 }

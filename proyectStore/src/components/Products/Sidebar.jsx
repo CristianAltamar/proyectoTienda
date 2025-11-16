@@ -54,7 +54,7 @@ export const Sidebar = () => {
     return (
         <>
             <button
-                className="lg:hidden absolute bottom-full right-0 z-20 pr-2 pb-3 cursor-pointer hover:scale-105 transition-transform duration-200"
+                className="lg:hidden absolute bottom-full right-8 -top-5 z-20 pr-2 pb-3 cursor-pointer hover:scale-105 transition-transform duration-200"
                 title="Categorías"
                 onClick={() => setIsOpen(true)}
             >
