@@ -32,7 +32,7 @@ export const ProductsPage = () => {
     return (
         <div className="flex w-full justify-center max-w-6xl my-8 mx-auto gap-8 relative">
             <Sidebar />
-            <div className="">
+            <div className="w-full">
                 <Filters />
                 {isCharging ? <p>Cargando productos...</p> :
                 <Products products={products} />}

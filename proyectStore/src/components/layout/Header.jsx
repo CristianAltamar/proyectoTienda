@@ -1,7 +1,6 @@
 import { Navbar } from "./Nav"
 export const Header = () => {
     const url = window.location.pathname.split('/').pop();
-    console.log(url);
     return (
         <header className="w-full flex flex-col items-center p-4 bg-gray-600 relative">
             <div className="mb-4">

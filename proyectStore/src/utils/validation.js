@@ -1,10 +1,11 @@
 import { endpoints } from "../api/enpoints.js";
 import { useFetch } from "../hooks/useFetch.jsx";
 
-export const validation = (user, password) => {
-    const login = async () => {
-            const response = await useFetch(endpoints.login(), "POST", { "username": user, "password": password }, true);
-            window.location.replace("/");
-    };
-    login();
+export const validation = async (user, password) => {
+    const response = await useFetch(endpoints.login(), "POST", { "username": user, "password": password }, true);
+    if (response.token) {
+        localStorage.setItem("token", response.token);
+        return true;
+    }
+    return false;
 }
