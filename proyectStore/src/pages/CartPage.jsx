@@ -6,9 +6,12 @@ import { useAuth } from "../hooks/useAuth.jsx";
 import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch.jsx";
 import { endpoints } from "../api/enpoints.js";
+import { useContext } from "react";
+import { ProductsContext } from "../contexts/contextProducts.jsx";
 
 export const CartPage = () => {
     const [cartProducts, setCartProducts] = useState([]);
+    const { products, setProducts } = useContext(ProductsContext);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -20,12 +23,17 @@ export const CartPage = () => {
 
                 const updatedProducts = await Promise.all(products.map(async p => {
                     const productData = await useFetch(endpoints.getProducts(p.productId), "GET", null, false);
-                    p = { ...p, "title": productData.title, "price": productData.price, "image": productData.image };
+                    p = { ...p, "title": productData.title, "price": productData.price, "image": productData.image,"subtotal": productData.price * p.quantity };
                     return p;
                 }));
                 setCartProducts(updatedProducts);
             }
+            const fetchProducts = async () => {
+                const data = await useFetch(endpoints.getProducts());
+                if (data) setProducts(data.slice(0, 4));
+            }
             fetchCart();
+            fetchProducts();
             return;
         }
         setCartProducts([]);
@@ -39,6 +47,7 @@ export const CartPage = () => {
                 <CartProducts cart={cartProducts} />
                 <Subtotals cart={cartProducts} />
             </div>
+            <Products products={products} />
         </div>
     )
 }
