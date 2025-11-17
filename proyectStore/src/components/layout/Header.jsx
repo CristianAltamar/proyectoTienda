@@ -1,6 +1,21 @@
 import { Navbar } from "./Nav"
+import { useEffect, useState, useContext } from "react";
+import { CartContext } from "../../contexts/contextCart.jsx";
+
 export const Header = () => {
+    const [userName, setUserName] = useState(false);
     const url = window.location.pathname.split('/').pop();
+    const { cartSubtotal, cartCount } = useContext(CartContext);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const user = JSON.parse(atob(token.split(".")[1]));
+            setUserName(user.user);
+        }
+    }, []);
+
+
     return (
         <header className="w-full flex flex-col items-center p-4 bg-gray-600 relative">
             <div className="mb-4">
@@ -15,12 +30,19 @@ export const Header = () => {
             <Navbar/>}
             { url !== "login" && url !== "create-account" && 
             <div className="absolute right-4 top-4">
-                <a 
-                href="/login"
-                className="text-gray-300 hover:text-white hover:border-b-2 cursor-pointer">
-                    Iniciar Sesión
-                </a> 
+                {userName ?
+                    <a href="/profile" className="text-white hover:underline">Hola, {userName}</a>
+                    :
+                    <a className="text-white hover:underline" href="/login">Iniciar Sesión</a>
+                }
             </div>}
+            <div className="absolute flex right-8 bottom-8 cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => window.location.replace("/cart")}>
+                <span className="ml-1 text-white hidden md:block">$ {cartSubtotal?.toFixed(2) || "0.00"}</span>
+                <svg className="w-6 h-6 text-white fill-current relative" aria-hidden="true" focusable="false" role="img">
+                    <use href={"/icons.svg#icon-cart"} />
+                </svg>
+                <span className="absolute -top-2 -right-2 text-xs bg-gray-600 text-white ">{cartCount || 0}</span>
+            </div>
         </header>
     )
 }

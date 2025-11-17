@@ -9,7 +9,7 @@ import { ProductsContext } from "../contexts/contextProducts.jsx"
 export const ProductPage = () => {
     const [isCharging, setIsCharging] = useState(false)
     const [product, setProduct] = useState({})
-    const { products, setProducts } = useContext(ProductsContext)
+    const { products, setFilters } = useContext(ProductsContext)
 
     useEffect(() => {
         setIsCharging(true)
@@ -20,21 +20,13 @@ export const ProductPage = () => {
         const getProduct = async () => {
             const p = await useFetch(endpoints.getProducts(id))
             setProduct(p)
+            setFilters({category: p.category, limit: 4})
             setIsCharging(false)
         }
 
         getProduct()
+
     },[])
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            if (!product.category) return
-            const data = await useFetch(endpoints.getProductsCategory(product.category));
-            if (data) setProducts(data.filter(p => p.title !== product.title).slice(0,3));
-        };
-
-        fetchProducts();
-    },[product])
 
     return(
         <>

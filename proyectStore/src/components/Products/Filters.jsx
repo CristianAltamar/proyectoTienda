@@ -1,7 +1,6 @@
 import { Lens } from "./Lens"
 import { FilterIcon } from "./FilterIcon"
 import { useState } from "react"
-import { setUrlFilters } from "../../utils/getFilters"
 import { useContext } from "react"
 import { ProductsContext } from "../../contexts/contextProducts"
 

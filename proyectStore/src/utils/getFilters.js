@@ -1,5 +1,5 @@
 const schema = {
-    search: {
+    name: {
         type: "string",
         minLength: 2,
         maxLength: 100,
@@ -38,9 +38,11 @@ export const setUrlFilters = (filters) => {
 
     for (const key in filters) {
         if (schema[key]) {
-            urlParams.set(key, typeof filters[key] === "object" ? JSON.stringify(filters[key]) : filters[key]);
+            if (filters[key] !== "" && filters[key] !== "all" && (!Array.isArray(filters[key]) && filters[key].length !== 0)) {
+                urlParams.set(key, typeof filters[key] === "object" ? JSON.stringify(filters[key]) : filters[key]);
+            }
         }
     }
     
-    window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
+    window.history.replaceState({}, '', `${window.location.pathname}${urlParams.toString() ? `?${urlParams.toString()}` : ''}`);
 };

@@ -9,21 +9,10 @@ import { ProductsContext } from "../contexts/contextProducts";
 
 
 export const HomePage = () => {
-    const [isCharging, setIsCharging] = useState(false);
-    const { filterProducts } = useFilters();
-    const { products, setProducts } = useContext(ProductsContext);
+    const { products, setFilters, isCharging } = useContext(ProductsContext);
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            setIsCharging(true);
-            const data = await useFetch(endpoints.getProducts());
-            if (data) {
-                const p = filterProducts({ products:data, home: true });
-                setProducts(p);
-            }
-            setIsCharging(false);
-        };
-        fetchProducts();
+        setFilters({limit: 6});
     }, []);
 
     return (

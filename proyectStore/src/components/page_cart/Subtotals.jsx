@@ -1,5 +1,8 @@
-export const Subtotals = ({ cart }) => {
-    const subtotal = cart.reduce((acc, p) => acc + p.subtotal, 0);
+import { useContext } from "react";
+import { CartContext } from "../../contexts/contextCart.jsx";
+
+export const Subtotals = () => {
+    const { cartSubtotal } = useContext(CartContext);
 
     const onHandleClick = () => window.location.replace("/purchase-address");
     
@@ -9,7 +12,7 @@ export const Subtotals = ({ cart }) => {
             <div className="flex flex-col gap-4">
                 <div className="flex justify-between mb-2">
                     <span>Subtotal:</span>
-                    <span>$ {subtotal}</span>
+                    <span>$ {cartSubtotal}</span>
                 </div>
                 <div className="flex justify-between mb-4">
                     <span>Envío:</span>
@@ -17,7 +20,7 @@ export const Subtotals = ({ cart }) => {
                 </div>
                 <div className="flex justify-between font-bold text-lg">
                     <span>Total:</span>
-                    <span>$ {subtotal + 60}</span>
+                    <span>$ {cartSubtotal + 60}</span>
                 </div>
                 <button onClick={() => onHandleClick()} className="bg-gray-700 text-white py-2 px-4 rounded-4xl cursor-pointer hover:bg-gray-800">finalizar compra</button>
             </div>
