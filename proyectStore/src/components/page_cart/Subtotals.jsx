@@ -12,7 +12,7 @@ export const Subtotals = () => {
             <div className="flex flex-col gap-4">
                 <div className="flex justify-between mb-2">
                     <span>Subtotal:</span>
-                    <span>$ {cartSubtotal}</span>
+                    <span>$ {cartSubtotal?.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between mb-4">
                     <span>Envío:</span>
@@ -20,7 +20,7 @@ export const Subtotals = () => {
                 </div>
                 <div className="flex justify-between font-bold text-lg">
                     <span>Total:</span>
-                    <span>$ {cartSubtotal + 60}</span>
+                    <span>$ {(cartSubtotal + 60).toFixed(2)}</span>
                 </div>
                 <button onClick={() => onHandleClick()} className="bg-gray-700 text-white py-2 px-4 rounded-4xl cursor-pointer hover:bg-gray-800">finalizar compra</button>
             </div>

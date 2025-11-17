@@ -1,6 +1,13 @@
 import { validation } from "../utils/validation.js";
+import { useEffect } from "react";
 
 export const LogingPage = () => {
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) window.location.replace("/profile");
+    }, []);
+
     const onSubmit = async e => {
         e.preventDefault();
         const form = e.target;

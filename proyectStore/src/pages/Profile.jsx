@@ -19,7 +19,6 @@ export const Profile = () => {
         window.location.replace("/login")
     }, []);
 
-
     return (
         <div className="w-full flex justify-center p-8">
             <div className="max-w-2xl w-full bg-gray-950 p-8 rounded-2xl text-gray-200 shadow-lg shadow-gray-400">

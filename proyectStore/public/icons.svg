@@ -5,4 +5,13 @@
     <symbol id="search-icon" viewBox="0 0 24 24">
         <path d="M21.71 20.29l-3.388-3.388a8.5 8.5 0 1 0-1.414 1.414l3.388 3.388a1 1 0 0 0 1.414-1.414zM10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"/>
     </symbol>
+    <symbol id="filter-icon" viewBox="0 0 24 24">
+        <path d="M3 4h18v2l-7 8v6l-4 2v-8L3 6V4z"/>
+    </symbol>
+    <symbol id="logout-icon" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="10" height="14" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M13 8v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13 12h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M17 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
 </svg>

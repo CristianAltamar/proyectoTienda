@@ -1,5 +1,3 @@
-import { Lens } from "./Lens"
-import { FilterIcon } from "./FilterIcon"
 import { useState } from "react"
 import { useContext } from "react"
 import { ProductsContext } from "../../contexts/contextProducts"
@@ -40,7 +38,9 @@ export const Filters = () => {
         <div className="flex flex-col lg:flex-row lg:sticky lg:w-full top-0 left-0 gap-2 mb-8">
             <div className="relative w-full lg:w-4/12">
                 <input type="text" placeholder="Buscar productos..." className="border p-2 rounded-2xl w-full" onChange={onInputChange} />
-                <Lens />
+                <svg className="w-6 h-6 text-gray-600 fill-current absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer" aria-hidden="true" focusable="false" role="img">
+                    <use href={"/icons.svg#search-icon"} />
+                </svg>
             </div>
             <button className={ filters["orderBy"] == "price-asc" ? actveStyles : baseStyles } onClick={() => onChange("price-asc", "orderBy" )}>
                 Precio ascendente
@@ -65,7 +65,9 @@ export const Filters = () => {
                 aria-expanded={showFilters}
                 aria-controls="mobile-filters"
             >
-                <FilterIcon />
+                <svg className="w-6 h-6 text-gray-800 fill-current relative" aria-hidden="true" focusable="false" role="img">
+                    <use href={"/icons.svg#filter-icon"} />
+                </svg>
             </button>
 
             <div className="hidden lg:flex flex-col gap-4 ">

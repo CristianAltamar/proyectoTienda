@@ -15,6 +15,11 @@ export const Header = () => {
         }
     }, []);
 
+    const logout = () => {
+        localStorage.removeItem("token");
+        window.location.replace("/login");
+    }
+
 
     return (
         <header className="w-full flex flex-col items-center p-4 bg-gray-600 relative">
@@ -31,18 +36,26 @@ export const Header = () => {
             { url !== "login" && url !== "create-account" && 
             <div className="absolute right-4 top-4">
                 {userName ?
-                    <a href="/profile" className="text-white hover:underline">Hola, {userName}</a>
+                    <div className="flex">
+                        <a href="/profile" className="text-white hover:underline">Hola, {userName}</a>
+                        <span onClick={logout} title="Logout" className="text-white cursor-pointer ml-2">
+                            <svg className="w-6 h-6 text-white fill-current relative" aria-hidden="true" focusable="false" role="img">
+                                <use href={"/icons.svg#logout-icon"} />
+                            </svg>
+                        </span>
+                    </div>
                     :
                     <a className="text-white hover:underline" href="/login">Iniciar Sesión</a>
                 }
             </div>}
+            { url !== "login" && url !== "create-account" && 
             <div className="absolute flex right-8 bottom-8 cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => window.location.replace("/cart")}>
                 <span className="ml-1 text-white hidden md:block">$ {cartSubtotal?.toFixed(2) || "0.00"}</span>
                 <svg className="w-6 h-6 text-white fill-current relative" aria-hidden="true" focusable="false" role="img">
                     <use href={"/icons.svg#icon-cart"} />
                 </svg>
                 <span className="absolute -top-2 -right-2 text-xs bg-gray-600 text-white ">{cartCount || 0}</span>
-            </div>
+            </div>}
         </header>
     )
 }
