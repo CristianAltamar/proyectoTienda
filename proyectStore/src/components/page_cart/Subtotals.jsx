@@ -3,6 +3,7 @@ import { CartContext } from "../../contexts/contextCart.jsx";
 
 export const Subtotals = () => {
     const { cartSubtotal } = useContext(CartContext);
+    const delivery = cartSubtotal > 0 ? 60 : 0;
 
     const onHandleClick = () => window.location.replace("/purchase-address");
     
@@ -16,11 +17,11 @@ export const Subtotals = () => {
                 </div>
                 <div className="flex justify-between mb-4">
                     <span>Envío:</span>
-                    <span>$ 60.00</span>
+                    <span>$ {delivery.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between font-bold text-lg">
                     <span>Total:</span>
-                    <span>$ {(cartSubtotal + 60).toFixed(2)}</span>
+                    <span>$ {(cartSubtotal + delivery).toFixed(2)}</span>
                 </div>
                 <button onClick={() => onHandleClick()} className="bg-gray-700 text-white py-2 px-4 rounded-4xl cursor-pointer hover:bg-gray-800">finalizar compra</button>
             </div>

@@ -12,7 +12,7 @@ const categories = [
 export const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const panelRef = useRef(null)
-    const { filters, setFilters, clearFilters } = useContext(ProductsContext)
+    const { filters, setFilters } = useContext(ProductsContext)
 
     // close on ESC
     useEffect(() => {

@@ -2,38 +2,78 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/contextCart.jsx";
 
 export const CartProducts = () => {
-    const { cartProducts, setCartProducts } = useContext(CartContext);
+    const { cartData, setCartData } = useContext(CartContext);
 
     const handleQuantityChange = (productId, newQuantity) => {
-        // Lógica para actualizar la cantidad del producto en el carrito
-        console.log(`Actualizar producto ${productId} a cantidad ${newQuantity}`);
+        if (newQuantity > 0) {
+            setCartData( prev => ({ ...prev, products: prev.products.map( p => {
+                if (p.productId === productId) {
+                    return { ...p, quantity: parseInt(newQuantity) };
+                }
+                return p;
+            })}));
+            return;
+        }
+        setCartData(prev => ({ ...prev, products: prev.products.filter( p => p.productId !== productId )}));
     }
     
     return (
         <>
-            {cartProducts.length === 0 ? (
+            {cartData?.products?.length === 0 ? (
                 <p>No hay productos en el carrito.</p>
             ) : (
                 <div className="grid grid-cols-1 gap-4 w-full">
-                    {cartProducts.map((product) => (
-                        <div key={product.productId} className="flex items-center gap-4 p-4 border-b border-gray-300">
-                            <img src={product.image} alt={product.title} className="w-20 h-20 object-cover" />
-                            <div className="flex-1">
-                                <h2 className="text-lg font-semibold">{product.title}</h2>
-                                <p className="text-gray-700">${product.price}</p>
-                            </div>
-                            <div>
-                                <label className="mr-2">Cantidad:</label>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    value={product.quantity}
-                                    className="w-16 border border-gray-300 rounded px-2 py-1"
-                                    onChange={(e) => handleQuantityChange(product.id, e.target.value)}
-                                />
-                            </div>
-                        </div>
-                    ))}
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th className="px-4 py-2 text-left text-sm font-medium text-gray-500"></th>
+                                <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Producto</th>
+                                <th className="px-4 py-2 text-right text-sm font-medium text-gray-500">Precio</th>
+                                <th className="px-4 py-2 text-center text-sm font-medium text-gray-500">Cantidad</th>
+                                <th className="px-4 py-2 text-right text-sm font-medium text-gray-500">Subtotal</th>
+                                <th className="px-4 py-2 text-center text-sm font-medium text-gray-500"></th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {cartData?.products?.map((product) => {
+                                const subtotal = (Number(product.price) || 0) * (Number(product.quantity) || 0);
+                                return (
+                                    <tr key={product.productId}>
+                                        <td className="px-4 py-3">
+                                            <img
+                                                src={product.image}
+                                                alt={product.title || "producto"}
+                                                className="h-16 w-16 object-cover rounded"
+                                            />
+                                        </td>
+                                        <td title={product.title} className="px-4 py-3 max-w-10 text-sm text-gray-700 whitespace-nowrap overflow-hidden text-ellipsis">{product.title}</td>
+                                        <td className="px-4 py-3 text-sm text-gray-700 text-right">
+                                            ${Number(product.price || 0).toFixed(2)}
+                                        </td>
+                                        <td className="px-4 py-auto text-sm text-gray-700 text-center">
+                                            <div className="flex justify-center items-center">
+                                                <button onClick={() => handleQuantityChange(product.productId, product.quantity - 1)} className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-800 cursor-pointer">-</button>
+                                                <span className="px-2 py-1 bg-gray-200 rounded ">{product.quantity}</span>
+                                                <button onClick={() => handleQuantityChange(product.productId, product.quantity + 1)} className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-800 cursor-pointer">+</button>
+                                            </div>
+                                        </td>
+                                        <td className="px-4 py-3 text-sm text-gray-700 text-right">
+                                            ${subtotal.toFixed(2)}
+                                        </td>
+                                        <td className="px-4 py-3 text-center">
+                                            <button
+                                                onClick={() => handleQuantityChange(product.productId, 0)}
+                                                className="text-red-600 hover:text-red-800 px-2 py-1 cursor-pointer"
+                                                aria-label={`Eliminar ${product.title}`}
+                                            >
+                                                ✖
+                                            </button>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
                 </div>
             )}
         </>

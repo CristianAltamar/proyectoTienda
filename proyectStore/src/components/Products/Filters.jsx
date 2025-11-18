@@ -54,6 +54,11 @@ export const Filters = () => {
             <button className={ filters["orderBy"] == "Z-A" ? actveStyles : baseStyles } onClick={() =>  onChange("Z-A", "orderBy" )}>
                 Z-A
             </button>
+            <button onClick={clearFilters} title="Limpiar filtros" className="text-white px-4 py-2 rounded-2xl cursor-pointer flex items-center justify-center gap-2 bg-red-600 lg:bg-transparent lg:text-gray-800 hover:scale-105 transition-transform duration-200">
+                <svg className="w-6 h-6 fill-current relative" aria-hidden="true" focusable="false" role="img">
+                    <use href={"/icons.svg#trash-icon"} />
+                </svg>
+            </button>
         </div>
     )
 

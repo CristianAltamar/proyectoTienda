@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { ProductsContext } from "../contexts/contextProducts.jsx";
 
 export const CartPage = () => {
-    const { products, setFilters } = useContext(ProductsContext);
+    const { cartData, setFilters } = useContext(ProductsContext);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -22,7 +22,7 @@ export const CartPage = () => {
                 <CartProducts />
                 <Subtotals />
             </div>
-            <Products products={products} />
+            <Products products={cartData?.products || []} />
         </div>
     )
 }
