@@ -5,7 +5,7 @@ export const Subtotals = () => {
     const { cartSubtotal } = useContext(CartContext);
     const delivery = cartSubtotal > 0 ? 60 : 0;
 
-    const onHandleClick = () => window.location.replace("/purchase-address");
+    const onHandleClick = () => window.location.replace("/checkout");
     
     return (
         <div className="w-80 p-6 border border-gray-300 rounded-lg shadow-md">
@@ -13,7 +13,7 @@ export const Subtotals = () => {
             <div className="flex flex-col gap-4">
                 <div className="flex justify-between mb-2">
                     <span>Subtotal:</span>
-                    <span>$ {cartSubtotal?.toFixed(2)}</span>
+                    <span>$ {cartSubtotal?.toFixed(2) || "0.00"}</span>
                 </div>
                 <div className="flex justify-between mb-4">
                     <span>Envío:</span>
@@ -21,7 +21,7 @@ export const Subtotals = () => {
                 </div>
                 <div className="flex justify-between font-bold text-lg">
                     <span>Total:</span>
-                    <span>$ {(cartSubtotal + delivery).toFixed(2)}</span>
+                    <span>$ {(cartSubtotal || 0 + delivery)?.toFixed(2)}</span>
                 </div>
                 <button onClick={() => onHandleClick()} className="bg-gray-700 text-white py-2 px-4 rounded-4xl cursor-pointer hover:bg-gray-800">finalizar compra</button>
             </div>

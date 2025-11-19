@@ -17,6 +17,7 @@ export const Header = () => {
 
     const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("cartData");
         window.location.replace("/login");
     }
 

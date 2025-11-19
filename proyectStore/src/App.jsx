@@ -11,6 +11,7 @@ import { Profile } from "./pages/Profile.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ProductsProvider } from "./contexts/contextProducts";
 import { CartProvider } from "./contexts/contextCart.jsx";
+import { Checkout } from "./pages/Checkout.jsx";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="/create-account" element={<CreatePage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
           </ProductsProvider>
         </BrowserRouter>
