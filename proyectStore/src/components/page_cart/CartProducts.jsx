@@ -2,24 +2,24 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/contextCart.jsx";
 
 export const CartProducts = () => {
-    const { cartData, setCartData } = useContext(CartContext);
+    const { cartProducts, setCartProducts } = useContext(CartContext);
 
     const handleQuantityChange = (productId, newQuantity) => {
         if (newQuantity > 0) {
-            setCartData( prev => ({ ...prev, products: prev.products.map( p => {
+            setCartProducts( prev => (prev.map( p => {
                 if (p.productId === productId) {
                     return { ...p, quantity: parseInt(newQuantity) };
                 }
                 return p;
-            })}));
+            })));
             return;
         }
-        setCartData(prev => ({ ...prev, products: prev.products.filter( p => p.productId !== productId )}));
+        setCartProducts(prev => (prev.filter( p => p.productId !== productId )));
     }
     
     return (
         <>
-            {cartData?.products?.length === 0 ? (
+            {cartProducts?.length === 0 ? (
                 <p>No hay productos en el carrito.</p>
             ) : (
                 <div className="grid grid-cols-1 gap-4 w-full">
@@ -35,7 +35,7 @@ export const CartProducts = () => {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {cartData?.products?.map((product) => {
+                            {cartProducts?.map((product) => {
                                 const subtotal = (Number(product.price) || 0) * (Number(product.quantity) || 0);
                                 return (
                                     <tr key={product.productId}>

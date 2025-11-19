@@ -23,7 +23,13 @@ export const Subtotals = () => {
                     <span>Total:</span>
                     <span>$ {(cartSubtotal || 0 + delivery)?.toFixed(2)}</span>
                 </div>
-                <button onClick={() => onHandleClick()} className="bg-gray-700 text-white py-2 px-4 rounded-4xl cursor-pointer hover:bg-gray-800">finalizar compra</button>
+                <button 
+                    onClick={() => onHandleClick()} 
+                    className={"bg-gray-700 text-white py-2 px-4 rounded-4xl cursor-pointer hover:bg-gray-800"} 
+                    disabled={cartSubtotal === 0}
+                >
+                    finalizar compra
+                </button>
             </div>
         </div>
     )

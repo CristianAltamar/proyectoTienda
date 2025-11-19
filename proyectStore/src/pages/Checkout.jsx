@@ -2,8 +2,10 @@ import { BillingAndShipping } from "../components/checkout/BillingAndShipping.js
 import { OrderSummary } from "../components/checkout/OrderSummary.jsx";
 
 export const Checkout = () => {
-    <div>
-        <BillingAndShipping />
-        <OrderSummary />
-    </div>
+    return (
+        <div className="flex gap-10 m-8 justify-center">
+            <BillingAndShipping />
+            <OrderSummary />
+        </div>
+    )
 }

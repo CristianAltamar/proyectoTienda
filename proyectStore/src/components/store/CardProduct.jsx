@@ -2,27 +2,27 @@ import { useContext } from "react"
 import { CartContext } from "../../contexts/contextCart.jsx"
 
 export const CardProduct = ({ product }) => {
-    const { cartData, setCartData } = useContext(CartContext)
+    const { cartProducts, setCartProducts } = useContext(CartContext)
     const baseUrl = "/product/"
-    const isInCartProduct = cartData?.products?.some(p => p.productId === product.id)
-    const quantity = isInCartProduct ? cartData?.products?.find(p => p.productId === product.id).quantity : 0;
+    const isInCartProduct = cartProducts?.some(p => p.productId === product.id);
+    const quantity = isInCartProduct ? cartProducts?.find(p => p.productId === product.id).quantity : 0;
     
     const onClickCard = e => {
         if (e.target.tagName !== "BUTTON") {
             window.location.replace(baseUrl + product.id)
         }
     }
-    const onChangeQuantity = (id, newQuantity) => {
+    const onChangeQuantity = (newQuantity) => {
         if (newQuantity > 0) {
-            setCartData( prev => ({ ...prev, products: prev.products.map( p => {
-                if (p.productId === id) {
+            setCartProducts( prev => ( prev.map( p => {
+                if (p.productId === product.id) {
                     return { ...p, quantity: newQuantity };
                 }
                 return p;
-            })}))
+            })))
             return;
         }
-        setCartData( prev => ({ ...prev, products: prev.products.filter( p => p.productId !== id )}))
+        setCartProducts( prev => prev.filter( p => p.productId !== product.id ))
     }
 
     const onAddProduct = () => {
@@ -34,7 +34,7 @@ export const CardProduct = ({ product }) => {
             subtotal: product.price,
             title: product.title
         }
-        setCartData(prev =>  ({...prev, products: [...prev.products, p]}))
+        setCartProducts(prev =>  ([...prev, p]))
     }
 
     return (
@@ -45,9 +45,9 @@ export const CardProduct = ({ product }) => {
                 <p className="text-gray-700 mb-4 text-center">${product.price}</p>
                 { isInCartProduct ?  
                     <div className="flex justify-center">
-                        <button onClick={() => onChangeQuantity(product.id, quantity - 1)} className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-800 cursor-pointer">-</button>
+                        <button onClick={() => onChangeQuantity(quantity - 1)} className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-800 cursor-pointer">-</button>
                         <span className="px-2 py-1 bg-gray-200 rounded ">{quantity}</span>
-                        <button onClick={() => onChangeQuantity(product.id, quantity + 1)} className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-800 cursor-pointer">+</button>
+                        <button onClick={() => onChangeQuantity(quantity + 1)} className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-800 cursor-pointer">+</button>
                     </div> :
                     <button onClick={() => onAddProduct()} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
                     >

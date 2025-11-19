@@ -3,18 +3,17 @@ import { CartContext } from "../../contexts/contextCart.jsx";
 import { Path } from "./Path.jsx";
 
 export const DetailProduct = ({ product }) => {
-    const { cartData, setCartData } = useContext(CartContext)
-    const isInCartProduct = cartData?.products?.some(p => p.productId === product.id)
-    const quantity = isInCartProduct ? cartData?.products?.find(p => p.productId === product.id).quantity : 0;
+    const { cartProducts, setCartProducts } = useContext(CartContext)
+    const isInCartProduct = cartProducts?.some(p => p.productId === product.id)
 
     const onAddProduct = () => {
         if (isInCartProduct) {
-            setCartData( prev => ({ ...prev, products: prev.products.map( p => {
+            setCartData( prev => (prev.map( p => {
                 if (p.productId === product.id) {
                     return { ...p, quantity: p.quantity + 1 };
                 }
                 return p;
-            })}))
+            })))
             return;
         }
         const p = {
@@ -25,7 +24,7 @@ export const DetailProduct = ({ product }) => {
             subtotal: product.price,
             title: product.title
         }
-        setCartData(prev =>  ({...prev, products: [...prev.products, p]}))
+        setCartProducts(prev =>  ([...prev, p]))
     }
     return (
         <div className="w-full flex flex-col items-center">

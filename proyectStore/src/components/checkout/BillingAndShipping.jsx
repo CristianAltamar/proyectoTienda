@@ -1,4 +1,3 @@
-import React from "react";
 
 // Componente de Facturación y Envío
 export function BillingAndShipping() {
