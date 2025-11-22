@@ -8,10 +8,10 @@ import { LogingPage } from "./pages/logingPage.jsx";
 import { CreatePage } from "./pages/CreatePage.jsx";
 import { CartPage } from "./pages/CartPage.jsx";
 import { Profile } from "./pages/Profile.jsx";
+import { OrdersHistoryPage } from "./pages/OrdersHistoryPage.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ProductsProvider } from "./contexts/contextProducts";
 import { CartProvider } from "./contexts/contextCart.jsx";
-import { Checkout } from "./pages/Checkout.jsx";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
               <Route path="/create-account" element={<CreatePage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/orders-history" element={<OrdersHistoryPage />} />
             </Routes>
           </ProductsProvider>
         </BrowserRouter>

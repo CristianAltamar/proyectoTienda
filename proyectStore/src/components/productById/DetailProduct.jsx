@@ -8,7 +8,7 @@ export const DetailProduct = ({ product }) => {
 
     const onAddProduct = () => {
         if (isInCartProduct) {
-            setCartData( prev => (prev.map( p => {
+            setCartProducts( prev => (prev.map( p => {
                 if (p.productId === product.id) {
                     return { ...p, quantity: p.quantity + 1 };
                 }

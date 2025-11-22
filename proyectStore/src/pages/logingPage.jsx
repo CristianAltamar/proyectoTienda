@@ -5,7 +5,12 @@ export const LogingPage = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (token) window.location.replace("/profile");
+        if (!token) {
+            localStorage.removeItem("cartData")
+            localStorage.removeItem("orderHistory")
+            return;
+        }
+        window.location.replace("/profile");
     }, []);
 
     const onSubmit = async e => {
