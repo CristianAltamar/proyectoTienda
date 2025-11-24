@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { ProfileContext } from "../../contexts/contexProfile";
+
 export const OrderHistoryItem = ({ order }) => {
+    const { profileData } = useContext(ProfileContext)
+
     const formattedDate = new Date(order.date).toLocaleDateString("es-ES", {
         year: "numeric",
         month: "long",
@@ -51,7 +56,7 @@ export const OrderHistoryItem = ({ order }) => {
 
             <div className="mt-5 pt-4 border-t border-gray-700">
                 <p className="text-sm text-gray-400">
-                <span className="font-semibold">Usuario:</span> {order.user}
+                <span className="font-semibold">Usuario:</span> {profileData.username}
                 </p>
             </div>
         </div>

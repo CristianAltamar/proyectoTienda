@@ -12,29 +12,34 @@ import { OrdersHistoryPage } from "./pages/OrdersHistoryPage.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ProductsProvider } from "./contexts/contextProducts";
 import { CartProvider } from "./contexts/contextCart.jsx";
+import { ProfileProviden } from "./contexts/contexProfile.jsx";
+import { Success } from "./pages/Success.jsx";
 
 function App() {
   return (
-    <CartProvider>
-      <Layout>
-        <BrowserRouter>
-          <ProductsProvider>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/product/:id" element={<ProductPage />} />
-              <Route path="/about" element={<AboutUsPage />} />
-              <Route path="/contact" element={<ContatPage />} />
-              <Route path="/login" element={<LogingPage />} />
-              <Route path="/create-account" element={<CreatePage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/orders-history" element={<OrdersHistoryPage />} />
-            </Routes>
-          </ProductsProvider>
-        </BrowserRouter>
-      </Layout>
-    </CartProvider>
+    <ProfileProviden>
+      <CartProvider>
+        <Layout>
+          <BrowserRouter>
+            <ProductsProvider>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/product/:id" element={<ProductPage />} />
+                <Route path="/about" element={<AboutUsPage />} />
+                <Route path="/contact" element={<ContatPage />} />
+                <Route path="/login" element={<LogingPage />} />
+                <Route path="/create-account" element={<CreatePage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/orders-history" element={<OrdersHistoryPage />} />
+                <Route path="/success" element={<Success />} />
+              </Routes>
+            </ProductsProvider>
+          </BrowserRouter>
+        </Layout>
+      </CartProvider>
+    </ProfileProviden>
   )
 }
 

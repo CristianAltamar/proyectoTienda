@@ -1,19 +1,12 @@
 import { Navbar } from "./Nav"
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { CartContext } from "../../contexts/contextCart.jsx";
+import { ProfileContext } from "../../contexts/contexProfile.jsx";
 
 export const Header = () => {
-    const [userName, setUserName] = useState(false);
     const url = window.location.pathname.split('/').pop();
     const { cartSubtotal, cartCount } = useContext(CartContext);
-
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            const user = JSON.parse(atob(token.split(".")[1]));
-            setUserName(user.user);
-        }
-    }, []);
+    const { profileData } = useContext(ProfileContext)
 
     const logout = () => {
         localStorage.removeItem("token");
@@ -37,9 +30,9 @@ export const Header = () => {
             <Navbar/>}
             { url !== "login" && url !== "create-account" && 
             <div className="absolute right-4 top-4">
-                {userName ?
+                {profileData?.username ?
                     <div className="flex">
-                        <a href="/profile" className="text-white hover:underline">Hola, {userName}</a>
+                        <a href="/profile" className="text-white hover:underline">Hola, {profileData.username}</a>
                         <span onClick={logout} title="Logout" className="text-white cursor-pointer ml-2">
                             <svg className="w-6 h-6 text-white fill-current relative" aria-hidden="true" focusable="false" role="img">
                                 <use href={"/icons.svg#logout-icon"} />

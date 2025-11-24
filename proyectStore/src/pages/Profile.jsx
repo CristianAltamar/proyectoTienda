@@ -1,27 +1,15 @@
-import { useEffect, useState, useRef } from "react"
-import { useFetch } from "../hooks/useFetch.jsx";
-import { endpoints } from "../api/enpoints.js";
 import { ProfileInfo } from "../components/profile/ProfileInfo.jsx";
 import { NavProfile } from "../components/profile/NavProfile.jsx";
+import { useContext, useEffect } from "react";
+import { ProfileContext } from "../contexts/contexProfile.jsx";
 
 export const Profile = () => {
-    const [profileData, setProfileData] = useState({});
-    const token = useRef(localStorage.getItem("token"))
+    const { profileData } = useContext(ProfileContext)
 
     useEffect(() => {
-        if (token.current) {
-            const user = JSON.parse(atob(token.current.split(".")[1]));
-            const fetchProfile = async () => {
-                const data = await useFetch(endpoints.getUsers(user.sub), "GET", null, false);
-                setProfileData(data);
-            }
-            fetchProfile();
-            return
-        }
-        window.location.replace("/login")
-    }, []);
-
-    
+        const token = localStorage.getItem("token")
+        if(!token) window.location.replace("/login");
+    })
 
     return (
         <div className="w-full flex flex-col items-center p-8 pt-14 relative">

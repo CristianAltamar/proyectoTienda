@@ -14,7 +14,7 @@ export const Subtotals = () => {
             return;
         }
         const user = JSON.parse(atob(token.split(".")[1])) || null;
-
+        
         const cartData = { date: new Date(), userId: user.sub, products: cartProducts };
         useFetch(endpoints.createCart(), "POST", cartData)
             .then((res) => {
