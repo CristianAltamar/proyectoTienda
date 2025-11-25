@@ -4,7 +4,6 @@ import { ProductsContext } from "../contexts/contextProducts";
 import { Sidebar } from "../components/Products/Sidebar";
 import { Filters } from "../components/Products/Filters";
 
-
 export const ProductsPage = () => {
     const { products, isCharging } = useContext(ProductsContext);
 
@@ -14,7 +13,9 @@ export const ProductsPage = () => {
             <div className="w-full">
                 <Filters />
                 {isCharging ? <p>Cargando productos...</p> :
-                <Products products={products} />}
+                (products.length > 0 ?
+                <Products products={products} />:
+                <p>No se encontraron Productos para tus filtros</p>)}
             </div>
         </div>
     )

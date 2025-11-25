@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router";
+import { ProductsContext } from "../../contexts/contextProducts";
 
 export const Navbar = () => {
     const [showFilters, setShowFilters] = useState(false)
+    const { setFilters } = useContext(ProductsContext)
+
+    const onProducts = () => setFilters({})
 
     const activeClasses = "px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 text-[#4CE9D7] font-semibold md:border-b-2 md:border-[#4CE9D7]"
     const inactiveClasses = "px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 text-gray-800 md:text-white hover:text-[#4CE9D7]"
@@ -17,6 +21,7 @@ export const Navbar = () => {
             </NavLink>
 
             <NavLink
+                onClick={() => onProducts()}
                 to="/products"
                 className={({ isActive }) => isActive ? activeClasses : inactiveClasses}
             >

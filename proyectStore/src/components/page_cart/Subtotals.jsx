@@ -5,7 +5,7 @@ import { endpoints } from "../../api/enpoints.js"
 import { useNavigate } from "react-router";
 
 export const Subtotals = () => {
-    const { cartProducts, cartSubtotal } = useContext(CartContext);
+    const { cartProducts, cartSubtotal, setCartProducts } = useContext(CartContext);
     const navigate = useNavigate()
     const delivery = cartSubtotal > 0 ? 60 : 0;
 
@@ -22,6 +22,7 @@ export const Subtotals = () => {
             .then((res) => {
                 if (res) {
                     localStorage.removeItem("cartData")
+                    setCartProducts([])
                     let orderHistory = localStorage.getItem("orderHistory")
                     orderHistory = orderHistory ? JSON.parse(orderHistory) : []
                     orderHistory = [...orderHistory, res]

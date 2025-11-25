@@ -1,12 +1,18 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useContext } from "react"
 import { ProductsContext } from "../../contexts/contextProducts"
 
 export const Filters = () => {
     const [showFilters, setShowFilters] = useState(false)
     const { filters, setFilters, clearFilters } = useContext(ProductsContext)
+    const [value, setValue] = useState(filters?.name || "")
+
+    useEffect(() => {
+        setValue(filters?.name || "")
+    }, [filters])
 
     const onInputChange = (e) => {
+        setValue(e.target.value)
         clearTimeout(window.searchTimeout)
         window.searchTimeout = setTimeout(() => {
             const value = e.target.value
@@ -37,7 +43,7 @@ export const Filters = () => {
     const Controls = (
         <div className="flex flex-col lg:flex-row lg:sticky lg:w-full top-0 left-0 gap-2 mb-8">
             <div className="relative w-full lg:w-4/12">
-                <input type="text" placeholder="Buscar productos..." className="border p-2 rounded-2xl w-full" onChange={onInputChange} />
+                <input type="text" placeholder="Buscar productos..." className="border p-2 rounded-2xl w-full" onChange={onInputChange} value={value} />
                 <svg className="w-6 h-6 text-gray-600 fill-current absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer" aria-hidden="true" focusable="false" role="img">
                     <use href={"/icons.svg#search-icon"} />
                 </svg>

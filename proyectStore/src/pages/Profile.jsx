@@ -11,7 +11,7 @@ export const Profile = () => {
     useEffect(() => {
         const token = localStorage.getItem("token")
         if(!token) navigate("/login");
-    })
+    },[])
 
     return (
         <div className="w-full flex flex-col items-center p-8 pt-14 relative">

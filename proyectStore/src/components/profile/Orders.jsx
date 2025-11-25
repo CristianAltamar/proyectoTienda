@@ -11,9 +11,12 @@ export const OrderHistory = ({ orders = [] }) => {
         <div className="max-w-3xl flex flex-col w-full items-center mx-10">
             <h2 className="text-3xl font-bold mb-6 text-gray-700">Historial de Órdenes</h2>
 
-            {orders.map((order, index) => (
+            {orders.length > 0 ?
+            orders.map((order, index) => (
                 <OrderHistoryItem key={index} order={order} />
-            ))}
+            )):
+            <p>No ha realizado ninguna compra.</p>
+            }
         </div>
     );
 };
