@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../../contexts/contextCart.jsx";
 import { CartTable } from "./CartTable.jsx";
-import { MobileTable } from "./mobileTable.jsx";
+import { MobileTable } from "./MobileTable.jsx";
 
 export const CartProducts = () => {
     const { cartProducts, setCartProducts } = useContext(CartContext);
