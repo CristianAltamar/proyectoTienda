@@ -18,7 +18,7 @@ export const CartPage = () => {
     return (
         <div className="w-full flex flex-col items-center gap-4">
             <PurchaseRoute activePage={"cart"} />
-            <div className="w-full flex justify-center max-w-6xl gap-8 p-8">
+            <div className="w-full flex flex-col justify-center items-center md:flex-row max-w-6xl gap-8 p-8">
                 <CartProducts />
                 <Subtotals />
             </div>

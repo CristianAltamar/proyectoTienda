@@ -10,8 +10,8 @@ export const NavProfile = () => {
                 Perfil
             </NavLink>
             <NavLink
-            to="/orders-history"
-            className={({ isActive }) => isActive ? "text-blue-500 hover:text-blue-600 hover:underline" : "text-gray-400 hover:text-gray-500 hover:underline"}
+                to="/orders-history"
+                className={({ isActive }) => isActive ? "text-blue-500 hover:text-blue-600 hover:underline" : "text-gray-400 hover:text-gray-500 hover:underline"}
             >
                 Historial de ordenes
             </NavLink>

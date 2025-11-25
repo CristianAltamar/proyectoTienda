@@ -1,57 +1,89 @@
-
+import { useState } from "react";
+import { NavLink } from "react-router";
 
 export const Navbar = () => {
-    // Función mejorada que maneja rutas anidadas
-    const isActive = (path) => {
-        return window.location.pathname.startsWith(path);
-    }
+    const [showFilters, setShowFilters] = useState(false)
 
-    // Función para rutas exactas
-    const isExactActive = (path) => {
-        return window.location.pathname === path;
-    }
+    const activeClasses = "px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 text-[#4CE9D7] font-semibold md:border-b-2 md:border-[#4CE9D7]"
+    const inactiveClasses = "px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 text-gray-800 md:text-white hover:text-[#4CE9D7]"
 
-    const baseClasses = "px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2"
-    const activeClasses = "text-[#4CE9D7] font-semibold border-b-2 border-[#4CE9D7]"
-    const inactiveClasses = "text-white  hover:text-[#4CE9D7]"
+    const navItems = (
+        <>
+            <NavLink
+                to="/"
+                className={({ isActive }) => isActive ? activeClasses : inactiveClasses}
+            >
+                Inicio
+            </NavLink>
+
+            <NavLink
+                to="/products"
+                className={({ isActive }) => isActive ? activeClasses : inactiveClasses}
+            >
+                Productos
+            </NavLink>
+
+            <NavLink
+                to="/about"
+                className={({ isActive }) => isActive ? activeClasses : inactiveClasses}
+            >
+                Sobre nosotros
+            </NavLink>
+
+            <NavLink
+                to="/contact"
+                className={({ isActive }) => isActive ? activeClasses : inactiveClasses}
+            >
+                Contacto
+            </NavLink>
+        </>
+    )
 
     return (
-        <nav className="flex justify-center mb-2">
-            <a
-            href="/"
-            className={`${baseClasses} ${
-                isExactActive('/') ? activeClasses : inactiveClasses
-            }`}
+        <>
+            <button
+                className="md:hidden absolute left-10 bottom-full top-10 z-20 hover:scale-105 transition-transform duration-200 cursor-pointer"
+                onClick={() => setShowFilters((s) => !s)}
+                aria-expanded={showFilters}
+                aria-controls="mobile-filters"
             >
-                <span>Inicio</span>
-            </a>
+                <svg className="w-6 h-6 text-white fill-current" aria-hidden="true" focusable="false" role="img">
+                    <use href={"/icons.svg#sidebar-icon"} />
+                </svg>
+            </button>
 
-            <a
-            href="/products"
-            className={`${baseClasses} ${
-                isActive('/products') ? activeClasses : inactiveClasses
-            }`}
-            >
-                <span>Productos</span>
-            </a>
+            <nav className="hidden md:flex justify-center mb-2">
+                {navItems}
+            </nav>
 
-            <a
-            href="/about"
-            className={`${baseClasses} ${
-                isActive('/about') ? activeClasses : inactiveClasses
-            }`}
-            >
-                <span>Sobre nosotros</span>
-            </a>
+            {showFilters && (
+                <>
+                    <div
+                        className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+                        onClick={() => setShowFilters(false)}
+                        aria-hidden="true"
+                    />
 
-            <a
-            href="/contact"
-            className={`${baseClasses} ${
-                isActive('/contact') ? activeClasses : inactiveClasses
-            }`}
-            >
-                <span>Contacto</span>
-            </a>
-        </nav>
+                    <aside
+                        id="mobile-filters"
+                        className="fixed top-0 left-0 z-50 w-80 max-w-full h-full bg-white p-4 shadow-lg transform transition-transform md:hidden"
+                        role="dialog"
+                        aria-modal="true"
+                    >
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-lg font-bold text-gray-800">Menú de navegación</h3>
+                            <button
+                                onClick={() => setShowFilters(false)}
+                                className="text-gray-600 hover:text-gray-900 cursor-pointer"
+                                aria-label="Cerrar filtros"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                        {navItems}
+                    </aside>
+                </>
+            )}
+        </>
     )
 }

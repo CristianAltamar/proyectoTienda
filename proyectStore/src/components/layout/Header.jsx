@@ -2,6 +2,7 @@ import { Navbar } from "./Nav"
 import { useContext } from "react";
 import { CartContext } from "../../contexts/contextCart.jsx";
 import { ProfileContext } from "../../contexts/contexProfile.jsx";
+import { Link } from "react-router";
 
 export const Header = () => {
     const url = window.location.pathname.split('/').pop();
@@ -44,13 +45,13 @@ export const Header = () => {
                 }
             </div>}
             { url !== "login" && url !== "create-account" && 
-            <div className="absolute flex right-8 bottom-8 cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => window.location.replace("/cart")}>
+            <Link to="/cart" className="absolute flex right-8 bottom-8 cursor-pointer hover:scale-105 transition-transform duration-200" >
                 <span className="ml-1 text-white hidden md:block">$ {cartSubtotal?.toFixed(2) || "0.00"}</span>
                 <svg className="w-6 h-6 text-white fill-current relative" aria-hidden="true" focusable="false" role="img">
                     <use href={"/icons.svg#icon-cart"} />
                 </svg>
                 <span className="absolute -top-2 -right-2 text-xs bg-gray-600 text-white ">{cartCount || 0}</span>
-            </div>}
+            </Link>}
         </header>
     )
 }

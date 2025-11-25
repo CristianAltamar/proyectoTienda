@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/contextCart.jsx";
 import { useFetch } from "../../hooks/useFetch.jsx"
 import { endpoints } from "../../api/enpoints.js"
+import { Navigate } from "react-router";
 
 export const Subtotals = () => {
     const { cartProducts, cartSubtotal } = useContext(CartContext);
