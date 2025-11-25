@@ -33,7 +33,7 @@ export const Header = () => {
             <div className="absolute right-4 top-4">
                 {profileData?.username ?
                     <div className="flex">
-                        <a href="/profile" className="text-white hover:underline">Hola, {profileData.username}</a>
+                        <Link to="/profile" className="text-white hover:underline">Hola, {profileData.username}</Link>
                         <span onClick={logout} title="Logout" className="text-white cursor-pointer ml-2">
                             <svg className="w-6 h-6 text-white fill-current relative" aria-hidden="true" focusable="false" role="img">
                                 <use href={"/icons.svg#logout-icon"} />
@@ -41,7 +41,7 @@ export const Header = () => {
                         </span>
                     </div>
                     :
-                    <a className="text-white hover:underline" href="/login">Iniciar Sesión</a>
+                    <Link className="text-white hover:underline" to="/login">Iniciar Sesión</Link>
                 }
             </div>}
             { url !== "login" && url !== "create-account" && 
