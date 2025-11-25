@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/contextCart.jsx";
 import { useFetch } from "../../hooks/useFetch.jsx"
 import { endpoints } from "../../api/enpoints.js"
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 
 export const Subtotals = () => {
     const { cartProducts, cartSubtotal } = useContext(CartContext);
+    const navigate = useNavigate()
     const delivery = cartSubtotal > 0 ? 60 : 0;
 
     const onHandleClick = async () => {
@@ -26,7 +27,7 @@ export const Subtotals = () => {
                     orderHistory = [...orderHistory, res]
                     orderHistory = JSON.stringify(orderHistory)
                     localStorage.setItem("orderHistory", orderHistory)
-                    window.location.replace("/success")
+                    navigate("/success")
                 }
             })
             .catch(e => console.error("Error creating order: ", e))

@@ -4,12 +4,14 @@ import { useEffect, useState, useContext } from "react"
 import { DetailProduct } from "../components/productById/DetailProduct.jsx"
 import { Products } from "../components/store/Products.jsx"
 import { ProductsContext } from "../contexts/contextProducts.jsx"
+import { useLocation } from "react-router"
 
 
 export const ProductPage = () => {
     const [isCharging, setIsCharging] = useState(false)
     const [product, setProduct] = useState({})
     const { products, setFilters } = useContext(ProductsContext)
+    const location = useLocation()
 
     useEffect(() => {
         setIsCharging(true)
@@ -26,7 +28,7 @@ export const ProductPage = () => {
 
         getProduct()
 
-    },[])
+    },[location.pathname])
 
     return(
         <>

@@ -16,8 +16,6 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         setCartSubtotal(cartProducts?.reduce((acc, item) => acc + item.quantity * item.price, 0));
         setCartCount(cartProducts?.reduce((acc, item) => acc + item.quantity, 0));
-        //Aquí es donde debería utilizar la API para actualizar el carrito del usuario
-        //useFetch(endpoints.updateCart(...), "PUT", {products: cartProducts}, false);
         localStorage.setItem("cartData", JSON.stringify(cartProducts));
     }, [cartProducts]);
 

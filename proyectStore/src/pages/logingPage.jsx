@@ -1,7 +1,9 @@
 import { validation } from "../utils/validation.js";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 export const LogingPage = () => {
+    const navigate = useNavigate()
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -10,7 +12,7 @@ export const LogingPage = () => {
             localStorage.removeItem("orderHistory")
             return;
         }
-        window.location.replace("/profile");
+        navigate("/profile");
     }, []);
 
     const onSubmit = async e => {

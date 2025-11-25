@@ -2,16 +2,17 @@ import { PurchaseRoute } from "../components/PurchaseRoute.jsx";
 import { CartProducts } from "../components/page_cart/CartProducts.jsx";
 import { Subtotals } from "../components/page_cart/Subtotals.jsx";
 import { Products } from "../components/store/Products.jsx";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useEffect, useContext  } from "react";
 import { ProductsContext } from "../contexts/contextProducts.jsx";
+import { useNavigate } from "react-router";
 
 export const CartPage = () => {
     const { products, setFilters } = useContext(ProductsContext);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (!token) window.location.replace("/login")
+        if (!token) navigate("/login")
         setFilters({ limit: 4 })
     }, []);
 

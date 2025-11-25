@@ -4,7 +4,7 @@ import { useFetch } from "../hooks/useFetch";
 import { useFilters } from "../hooks/useFilters";
 import { getUrlFilters } from "../utils/getFilters";
 import { setUrlFilters } from "../utils/getFilters";
-
+import { useLocation } from "react-router";
 
 export const ProductsContext = createContext();
 
@@ -12,6 +12,7 @@ export const ProductsProvider = ({ children }) => {
     const [isCharging, setIsCharging] = useState(false);
     const [products, setProducts] = useState([]);
     const [filters, setFilters] = useState({});
+    const location = useLocation()
 
     const clearFilters = () => setFilters({})
 
@@ -21,8 +22,8 @@ export const ProductsProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        const currentLocation = window.location.pathname.split('/').pop();
-        if (currentLocation === "products") setUrlFilters(filters);
+        const currentLocation = location.pathname;
+        if (currentLocation === "/products") setUrlFilters(filters);
 
         const fetchProducts = async () => {
             setIsCharging(true);

@@ -1,15 +1,17 @@
 import { useContext } from "react"
 import { CartContext } from "../../contexts/contextCart.jsx"
+import { useNavigate } from "react-router"
 
 export const CardProduct = ({ product }) => {
     const { cartProducts, setCartProducts } = useContext(CartContext)
+    const navigate = useNavigate()
     const baseUrl = "/product/"
     const isInCartProduct = cartProducts?.some(p => p.productId === product.id);
     const quantity = isInCartProduct ? cartProducts?.find(p => p.productId === product.id).quantity : 0;
     
     const onClickCard = e => {
         if (e.target.tagName !== "BUTTON") {
-            window.location.replace(baseUrl + product.id)
+            navigate(baseUrl + product.id)
         }
     }
     const onChangeQuantity = (newQuantity) => {

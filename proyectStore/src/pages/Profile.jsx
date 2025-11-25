@@ -2,13 +2,15 @@ import { ProfileInfo } from "../components/profile/ProfileInfo.jsx";
 import { NavProfile } from "../components/profile/NavProfile.jsx";
 import { useContext, useEffect } from "react";
 import { ProfileContext } from "../contexts/contexProfile.jsx";
+import { useNavigate } from "react-router";
 
 export const Profile = () => {
     const { profileData } = useContext(ProfileContext)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        if(!token) window.location.replace("/login");
+        if(!token) navigate("/login");
     })
 
     return (
