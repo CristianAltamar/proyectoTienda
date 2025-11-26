@@ -20,12 +20,12 @@ export const Header = () => {
     return (
         <header className="w-full flex flex-col items-center p-4 bg-gray-600 relative">
             <div className="mb-4">
-                <a href="/">
+                <Link to="/">
                     <h1 className="flex flex-col items-center cursor-pointer">
                         <span className="text-2xl text-white leading-none">Tienda</span>
                         <span className="text-3xl leading-none font-bold text-[#4CE9D7]">Practica</span>
                     </h1>
-                </a>
+                </Link>
             </div>
             { url !== "login" && url !== "create-account" && 
             <Navbar/>}

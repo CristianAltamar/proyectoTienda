@@ -1,14 +1,15 @@
 import { validation } from "../utils/validation.js";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
+import { ProfileContext } from "../contexts/contexProfile.jsx";
 
 export const LogingPage = () => {
     const navigate = useNavigate()
+    const { getProfileData } = useContext(ProfileContext)
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
-            localStorage.removeItem("cartData")
             localStorage.removeItem("orderHistory")
             return;
         }
@@ -23,7 +24,10 @@ export const LogingPage = () => {
         
         const isValid = await validation(user, password);
         
-        if (isValid) window.location.replace("/");
+        if (isValid) { 
+            navigate("/");
+            getProfileData()
+        }
     }
 
     return (
