@@ -14,11 +14,16 @@ import { CartProvider } from "./contexts/contextCart.jsx";
 import { ProfileProviden } from "./contexts/contexProfile.jsx";
 import { Success } from "./pages/Success.jsx";
 import { NotFound } from "./pages/NotFound.jsx";
-
 function App() {
   return (
     <ProfileProviden>
       <CartProvider>
+
+
+
+
+
+        
         <BrowserRouter>
             <ProductsProvider>
               <Routes>

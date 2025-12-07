@@ -9,11 +9,19 @@ export const useFetchCart = async () => {
         const data = await useFetch(endpoints.getCarts(id), "GET", null, false);
         const products = data?.products || [];
 
+
+
+
         const updatedProducts = await Promise.all(products.map(async p => {
             const productData = await useFetch(endpoints.getProducts(p.productId), "GET", null, false);
             p = { ...p, "title": productData.title, "price": productData.price, "image": productData.image,"subtotal": productData.price * p.quantity };
             return p;
         }));
         return updatedProducts;
+
+
+
+
+        
     }
 }
