@@ -11,4 +11,6 @@ export const useFilters = ( products, { name = "", category = "all", priceRange 
     });
     const ordered = orderByProducts(filtered, orderBy);
     return ordered;
+
+    
 };
